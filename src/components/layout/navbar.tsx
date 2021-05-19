@@ -1,9 +1,17 @@
 import React from 'react'
 
-interface navbarProps {
+export type langVariant = string
 
+interface navbarProps {
+    lang:langVariant
 }
 
-export const navbar: React.FC<navbarProps> = () => {
-    return ();
+const test = ['tailwind','javascript']
+
+export const Navbar: React.FC<navbarProps> = ({ children, lang = "tailwind" }) => {
+  return (
+    <nav className='bg-gray-800'>
+
+		</nav>
+  )
 }
