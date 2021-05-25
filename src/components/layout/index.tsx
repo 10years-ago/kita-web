@@ -10,7 +10,7 @@ export const Layout: React.FC<layoutProps> = ({ children, lang = 'tailwind'}) =>
     return (
       <>
         <Navbar lang={lang} />
-        {/* <div className='bg-blue-700'>xxx</div> */}
+        {children}
       </>
     )
 }
