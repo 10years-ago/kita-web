@@ -5,12 +5,17 @@ import { LayoutMenu } from './menu'
 export type langVariant = string
 
 interface navbarProps {
-    lang:langVariant
+    lang: langVariant,
+    signIn: boolean,
+    setSignIn: any
 }
 
 const test = ['tailwind','javascript']
 
-export const Navbar: React.FC<navbarProps> = ({ children, lang = "tailwind" }) => {
+export const Navbar: React.FC<navbarProps> = ({ children, lang = "tailwind", signIn, setSignIn }) => {
+  function abc () {
+    setSignIn(true)
+  }
   return (
     <nav className='bg-gray-800'>
       <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
@@ -27,7 +32,12 @@ export const Navbar: React.FC<navbarProps> = ({ children, lang = "tailwind" }) =
               }
             </div>
           </div>
-          <LayoutMenu avatarUrl='kita.jpg'/>
+          {
+            // signIn ? 
+            // <LayoutMenu avatarUrl='kita.jpg'/> 
+            // : 
+            <a onClick={() => abc()} className='group border-l pl-6 border-gray-700 hover:text-teal-400 flex items-center text-white cursor-pointer hover:text-blue-400'>登录 →</a>
+          }
         </div>
       </div>
 		</nav>

@@ -46,6 +46,11 @@
   dependencies:
     purgecss "^3.1.3"
 
+"@graphql-typed-document-node/core@^3.1.0":
+  version "3.1.0"
+  resolved "https://registry.npm.taobao.org/@graphql-typed-document-node/core/download/@graphql-typed-document-node/core-3.1.0.tgz#0eee6373e11418bfe0b5638f654df7a4ca6a3950"
+  integrity sha1-Du5jc+EUGL/gtWOPZU33pMpqOVA=
+
 "@hapi/accept@5.0.1":
   version "5.0.1"
   resolved "https://registry.npm.taobao.org/@hapi/accept/download/@hapi/accept-5.0.1.tgz?cache=0&sync_timestamp=1612503836719&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40hapi%2Faccept%2Fdownload%2F%40hapi%2Faccept-5.0.1.tgz#068553e867f0f63225a506ed74e899441af53e10"
@@ -159,6 +164,14 @@
   version "0.16.1"
   resolved "https://registry.npm.taobao.org/@types/scheduler/download/@types/scheduler-0.16.1.tgz?cache=0&sync_timestamp=1613384488348&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40types%2Fscheduler%2Fdownload%2F%40types%2Fscheduler-0.16.1.tgz#18845205e86ff0038517aab7a18a62a6b9f71275"
   integrity sha1-GIRSBehv8AOFF6q3oYpiprn3EnU=
+
+"@urql/core@^2.1.0":
+  version "2.1.2"
+  resolved "https://registry.nlark.com/@urql/core/download/@urql/core-2.1.2.tgz#aa27ff52bac0c0c263345f17d0df0f54480716d3"
+  integrity sha1-qif/UrrAwMJjNF8X0N8PVEgHFtM=
+  dependencies:
+    "@graphql-typed-document-node/core" "^3.1.0"
+    wonka "^4.0.14"
 
 acorn-node@^1.6.1:
   version "1.8.2"
@@ -995,6 +1008,11 @@ graceful-fs@^4.1.2, graceful-fs@^4.1.6, graceful-fs@^4.2.0:
   resolved "https://registry.npm.taobao.org/graceful-fs/download/graceful-fs-4.2.6.tgz#ff040b2b0853b23c3d31027523706f1885d76bee"
   integrity sha1-/wQLKwhTsjw9MQJ1I3BvGIXXa+4=
 
+graphql@^15.5.0:
+  version "15.5.0"
+  resolved "https://registry.nlark.com/graphql/download/graphql-15.5.0.tgz?cache=0&sync_timestamp=1621903818694&other_urls=https%3A%2F%2Fregistry.nlark.com%2Fgraphql%2Fdownload%2Fgraphql-15.5.0.tgz#39d19494dbe69d1ea719915b578bf920344a69d5"
+  integrity sha1-OdGUlNvmnR6nGZFbV4v5IDRKadU=
+
 has-bigints@^1.0.1:
   version "1.0.1"
   resolved "https://registry.nlark.com/has-bigints/download/has-bigints-1.0.1.tgz#64fe6acb020673e3b78db035a5af69aa9d07b113"
@@ -1415,6 +1433,13 @@ native-url@0.3.4:
   integrity sha1-KclDFyrthsY87mLIwE239XVmYfg=
   dependencies:
     querystring "^0.2.0"
+
+next-urql@^3.1.0:
+  version "3.1.0"
+  resolved "https://registry.nlark.com/next-urql/download/next-urql-3.1.0.tgz#9c354cfd54cdf886988a2cb1ea0fd89f48ee7555"
+  integrity sha1-nDVM/VTN+IaYiiyx6g/Yn0judVU=
+  dependencies:
+    react-ssr-prepass "^1.4.0"
 
 next@10.2.0:
   version "10.2.0"
@@ -1897,10 +1922,20 @@ react-is@16.13.1, react-is@^16.8.1:
   resolved "https://registry.nlark.com/react-is/download/react-is-16.13.1.tgz#789729a4dc36de2999dc156dd6c1d9c18cea56a4"
   integrity sha1-eJcppNw23imZ3BVt1sHZwYzqVqQ=
 
+react-is@^17.0.2:
+  version "17.0.2"
+  resolved "https://registry.nlark.com/react-is/download/react-is-17.0.2.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.nlark.com%2Freact-is%2Fdownload%2Freact-is-17.0.2.tgz#e691d4a8e9c789365655539ab372762b0efb54f0"
+  integrity sha1-5pHUqOnHiTZWVVOas3J2Kw77VPA=
+
 react-refresh@0.8.3:
   version "0.8.3"
   resolved "https://registry.nlark.com/react-refresh/download/react-refresh-0.8.3.tgz#721d4657672d400c5e3c75d063c4a85fb2d5d68f"
   integrity sha1-ch1GV2ctQAxePHXQY8SoX7LV1o8=
+
+react-ssr-prepass@^1.4.0:
+  version "1.4.0"
+  resolved "https://registry.nlark.com/react-ssr-prepass/download/react-ssr-prepass-1.4.0.tgz#33a3db19414f0f8f9f3f781c88f760ae366b4f51"
+  integrity sha1-M6PbGUFPD4+fP3gciPdgrjZrT1E=
 
 react@17.0.2:
   version "17.0.2"
@@ -2325,6 +2360,14 @@ url@^0.11.0:
     punycode "1.3.2"
     querystring "0.2.0"
 
+urql@^2.0.3:
+  version "2.0.3"
+  resolved "https://registry.nlark.com/urql/download/urql-2.0.3.tgz#41bc4ad3ea7a1c995bbc8002f9ee82af1396bd26"
+  integrity sha1-QbxK0+p6HJlbvIAC+e6CrxOWvSY=
+  dependencies:
+    "@urql/core" "^2.1.0"
+    wonka "^4.0.14"
+
 use-subscription@1.5.1:
   version "1.5.1"
   resolved "https://registry.nlark.com/use-subscription/download/use-subscription-1.5.1.tgz?cache=0&sync_timestamp=1620922660795&other_urls=https%3A%2F%2Fregistry.nlark.com%2Fuse-subscription%2Fdownload%2Fuse-subscription-1.5.1.tgz#73501107f02fad84c6dd57965beb0b75c68c42d1"
@@ -2413,6 +2456,11 @@ which-typed-array@^1.1.2:
     function-bind "^1.1.1"
     has-symbols "^1.0.1"
     is-typed-array "^1.1.3"
+
+wonka@^4.0.14:
+  version "4.0.15"
+  resolved "https://registry.nlark.com/wonka/download/wonka-4.0.15.tgz#9aa42046efa424565ab8f8f451fcca955bf80b89"
+  integrity sha1-mqQgRu+kJFZauPj0UfzKlVv4C4k=
 
 wrappy@1:
   version "1.0.2"
