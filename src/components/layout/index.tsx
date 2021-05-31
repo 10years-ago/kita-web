@@ -14,7 +14,7 @@ export const Layout: React.FC<layoutProps> = ({ children, lang = 'tailwind', cla
   },[signIn])
     return (
       <>
-      <div className={`relative ${className}`}>
+      <div className={`relative h-screen bg-gray-100 ${className || ''}`}>
         <Navbar lang={lang} signIn={signIn} setSignIn={ setSignIn }/>
         <SignIn />
         {children}

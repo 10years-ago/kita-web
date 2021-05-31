@@ -36,7 +36,7 @@ export const Navbar: React.FC<navbarProps> = ({ children, lang = "tailwind", sig
             // signIn ? 
             // <LayoutMenu avatarUrl='kita.jpg'/> 
             // : 
-            <a onClick={() => abc()} className='group border-l pl-6 border-gray-700 hover:text-teal-400 flex items-center text-white cursor-pointer hover:text-blue-400'>登录 →</a>
+              <a onClick={() => abc()} className='group border-l pl-6 border-gray-700 hover:text-teal-400 flex items-center text-white cursor-pointer hover:text-blue-400'>登录 →</a>
           }
         </div>
       </div>
