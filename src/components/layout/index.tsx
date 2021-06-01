@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { Navbar, langVariant } from './navbar'
-import { SignIn } from './signIn'
 
 interface layoutProps {
-  lang: langVariant
+  lang?: langVariant
   className?: string
 }
 
@@ -16,8 +15,9 @@ export const Layout: React.FC<layoutProps> = ({ children, lang = 'tailwind', cla
       <>
       <div className={`relative h-screen bg-gray-100 ${className || ''}`}>
         <Navbar lang={lang} signIn={signIn} setSignIn={ setSignIn }/>
-        <SignIn />
-        {children}
+        <main className='max-w-8xl mx-auto'>
+          {children}
+        </main>
       </div>
       </>
     )
