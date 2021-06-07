@@ -2,7 +2,6 @@ import React, { Fragment } from 'react'
 import { Menu, Transition } from '@headlessui/react'
 import { Avatar } from 'components/Avatar'
 
-const navigation = ['Dashboard', 'Team', 'Projects', 'Calendar', 'Reports']
 const profile = ['登录', '个人信息', '登出']
 
 interface menuProps {
