@@ -26,6 +26,5 @@ const MyApp = ({ Component, pageProps }) => {
   }
 
 export default withUrqlClient ((_ssrExchange, ctx) => ({
-  // ...add your Client options here
   url: 'http://localhost:4000/graphql',
 }))(MyApp);
