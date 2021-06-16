@@ -6,7 +6,7 @@ import { useMutation } from 'urql';
 interface indexProps {
 
 }
-
+//
 const registerMutation = `
   mutation ($variables: UserRegisterInput!) {
     register (variables:$variables) {
@@ -20,7 +20,10 @@ export const Login: React.FC<indexProps> = () => {
   const [name,setName] = useState('')
   const [email,setEmail] = useState('')
   const [paw,setPaw] = useState('')
+  // 验证是否正确
+  const [isCheck,setIsCheck] = useState([true,true,true])
   const [registerTodoResult, registerTodo] = useMutation(registerMutation);
+  const emailReg = /^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/
 
   const register = () => {
     const variables = {
@@ -32,10 +35,11 @@ export const Login: React.FC<indexProps> = () => {
       console.log(res)
     })
   }
+  console.log(isCheck)
     return (
       <>
         <Layout>
-          <div className=' max-w-4xl mx-auto flex mt-56 '>
+          <div className='max-w-4xl mx-auto flex mt-56 '>
             <div className='flex-1 text-left'>
               <h1 className='text-5xl font-semibold'>欢迎来到kita的小屋</h1>
               <div className='flex justify-around mt-5'>
@@ -52,31 +56,73 @@ export const Login: React.FC<indexProps> = () => {
             <div className='w-1/3'>
               <form>
                 <div className='bg-white rounded-xl p-5 shadow-md flex flex-col h-auto'>
-                  <label htmlFor="name">用户名</label>
-                  <input 
-                    type="text" 
-                    value={name} 
-                    name="name" 
-                    id="name" 
-                    className='rounded border-gray-300 border h-10 p-3 my-2 :focus:shadow-md '
-                    onChange={(e) => setName(e.target.value)}
+                  <div className='pb-3 flex flex-col'>
+                    <label htmlFor="name">用户名</label>
+                    <input 
+                      type="text" 
+                      value={name} 
+                      name="name" 
+                      id="name" 
+                      className={`rounded border h-10 p-3 my-2 ${isCheck[0] ? 'border-gray-300' : 'border-red-500 rounde'}`}
+                      onChange={(e) => setName(e.target.value.trim())}
+                      onBlur={(e) => {
+                        if(e.target.value.trim() === '' || e.target.value.length > 32) {
+                          setIsCheck([false,isCheck[1],isCheck[2]])
+                        } else {
+                          setIsCheck([true,isCheck[1],isCheck[2]])
+                        }
+                      }}
                     />
-                  <label htmlFor="email">邮箱</label>
-                  <input 
-                    type="email" 
-                    name="password" 
-                    id="email" 
-                    className='rounded border-gray-300 border h-10 p-3 my-2' 
-                    onChange={(e) => setEmail(e.target.value)}
+                    {
+                      !isCheck[0] && (
+                        <p className='text-red-600'>用户名不能为空或超过32个字符</p>
+                      )
+                    }
+                  </div>
+                  <div className='pb-3 flex flex-col'>
+                    <label htmlFor="email">邮箱</label>
+                    <input 
+                      type="email" 
+                      name="email" 
+                      id="email" 
+                      className={`rounded border h-10 p-3 my-2 ${isCheck[1] ? 'border-gray-300' : 'border-red-500 rounde'}`}
+                      onChange={(e) => setEmail(e.target.value)}
+                      onBlur={(e) => {
+                        if(e.target.value.trim() === '' || !emailReg.test(e.target.value)) {
+                          setIsCheck([isCheck[0],false,isCheck[2]])
+                        } else {
+                          setIsCheck([isCheck[0],true,isCheck[2]])
+                        }
+                      }}
                     />
-                  <label htmlFor="password">密码</label>
-                  <input 
-                    type="text" 
-                    name="password" 
-                    id="password" 
-                    className='rounded border-gray-300 border h-10 p-3 my-2'
-                    onChange={(e) => setPaw(e.target.value)}
+                    {
+                      !isCheck[1] && (
+                        <p className='text-red-600'>邮箱格式不正确</p>
+                      )
+                    }
+                  </div>
+                  <div className='pb-3 flex flex-col'>
+                    <label htmlFor="password">密码</label>
+                    <input 
+                      type="text" 
+                      name="password" 
+                      id="password" 
+                      className={`rounded border h-10 p-3 my-2 ${isCheck[2] ? 'border-gray-300' : 'border-red-500 rounde'}`}
+                      onChange={(e) => setPaw(e.target.value)}
+                      onBlur={(e) => {
+                        if(e.target.value.trim() === '' || e.target.value.length > 23 || e.target.value.length < 6) {
+                          setIsCheck([isCheck[0],isCheck[1],false])
+                        } else {
+                          setIsCheck([isCheck[0],isCheck[1],true])
+                        }
+                      }}
                     />
+                    {
+                      !isCheck[2] && (
+                        <p className='text-red-600'>密码请设置在6-23位之间</p>
+                      )
+                    }
+                  </div>
                   <button type='button' className='w-full bg-blue-500 text-white h-10 rounded mt-4' onClick={() => register()}>注册</button>
                   <button type='button' className='w-full bg-blue-500 text-white h-10 rounded mt-4'>登录</button>
                 </div>
