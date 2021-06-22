@@ -6,7 +6,7 @@ import { useMutation } from 'urql';
 interface indexProps {
 
 }
-//
+
 const registerMutation = `
   mutation ($variables: UserRegisterInput!) {
     register (variables:$variables) {
@@ -14,7 +14,18 @@ const registerMutation = `
       name
     }
   }
-`;
+`
+
+const getPINMutation = `
+  mutation ($email: String!) {
+    getPIN (email:$email) {
+      id
+      name
+      pin
+      email
+    }
+  }
+`
 
 export const Login: React.FC<indexProps> = () => {
   const [name,setName] = useState('')
@@ -22,7 +33,8 @@ export const Login: React.FC<indexProps> = () => {
   const [paw,setPaw] = useState('')
   // 验证是否正确
   const [isCheck,setIsCheck] = useState([true,true,true])
-  const [registerTodoResult, registerTodo] = useMutation(registerMutation);
+  const [registerTodoResult, registerTodo] = useMutation(registerMutation)
+  const [getPINTodoResult, getPINTodo] = useMutation(getPINMutation)
   const emailReg = /^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/
 
   const register = () => {
@@ -32,10 +44,14 @@ export const Login: React.FC<indexProps> = () => {
       password:paw
     }
     registerTodo({variables}).then(res => {
+      
+    })
+  }
+  const PIN = (email) => {
+    getPINTodo({email}).then(res => {
       console.log(res)
     })
   }
-  console.log(isCheck)
     return (
       <>
         <Layout>
@@ -100,6 +116,14 @@ export const Login: React.FC<indexProps> = () => {
                         <p className='text-red-600'>邮箱格式不正确</p>
                       )
                     }
+                    <div className='flex'>
+                      <input type="text" maxLength={6} className='rounded border h-10 p-3 my-2 border-gray-300 mr-2 w-36'/>
+                      <button 
+                        type='button' 
+                        className='w-full bg-blue-500 text-white h-10 rounded mt-2'
+                        onClick={() => PIN(email)}
+                      >获取验证码</button>
+                    </div>
                   </div>
                   <div className='pb-3 flex flex-col'>
                     <label htmlFor="password">密码</label>
