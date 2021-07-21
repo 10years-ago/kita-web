@@ -1,21 +1,29 @@
 import React from 'react'
 import { Avatar } from 'components/Avatar'
 import { LayoutMenu } from './menu'
+import { useRouter } from 'next/router'
+import { useQuery } from 'urql'
+import { loginVerification } from 'common/query/user'
+import cookie from 'react-cookies'
 
 export type langVariant = string
 
 interface navbarProps {
-    lang: langVariant,
-    signIn: boolean,
-    setSignIn: any
+    lang: langVariant
 }
 
 const test = ['tailwind','javascript']
 
-export const Navbar: React.FC<navbarProps> = ({ children, lang = "tailwind", signIn, setSignIn }) => {
-  function abc () {
-    setSignIn(true)
+export const Navbar: React.FC<navbarProps> = ({ lang = "tailwind" }) => {
+  const router = useRouter()
+  console.log(cookie.load('user'))
+  const [result, reexecuteQuery] = useQuery({
+  query: loginVerification,
+  variables:{
+    token: cookie.load('user') || ''
   }
+  });
+  const { data, fetching, error } = result;
   return (
     <nav className='bg-gray-800'>
       <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
@@ -33,10 +41,14 @@ export const Navbar: React.FC<navbarProps> = ({ children, lang = "tailwind", sig
             </div>
           </div>
           {
-            // signIn ? 
-            // <LayoutMenu avatarUrl='kita.jpg'/> 
-            // : 
-              <a onClick={() => abc()} className='group border-l pl-6 border-gray-700 hover:text-teal-400 flex items-center text-white cursor-pointer hover:text-blue-400'>登录 →</a>
+            data?.userByToken && !fetching && (
+              <LayoutMenu avatarUrl='kita.jpg'/> 
+            )
+          } 
+          {
+            !data?.userByToken && !fetching && (
+              <a onClick={() => router.push('/login')} className='group border-l pl-6 border-gray-700 hover:text-teal-400 flex items-center text-white cursor-pointer hover:text-blue-400'>登录 →</a>
+            )
           }
         </div>
       </div>
