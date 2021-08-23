@@ -50,6 +50,7 @@ export const Login: React.FC<indexProps> = () => {
         cookie.save('user',res?.data?.login?.token,{
           expire:new Date(res?.data?.login?.tokenAt)
         })
+        // console.log()
         router.push('/')
       } else {
         console.log('邮箱或密码错误')
@@ -70,7 +71,7 @@ export const Login: React.FC<indexProps> = () => {
   }
     return (
       <>
-        <Layout>
+        <Layout mainClassName='max-w-8xl'>
           <div className='max-w-4xl mx-auto flex mt-56 '>
             <div className='flex-1 text-left'>
               <h1 className='text-5xl font-semibold'>欢迎来到kita的小屋</h1>
