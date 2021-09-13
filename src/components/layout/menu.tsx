@@ -17,7 +17,7 @@ export const LayoutMenu: React.FC<menuProps> = ({ avatarUrl }) => {
           <>
             {/* <div> */}
               <Menu.Button as='div' className={`max-w-xs bg-gray-800 rounded-full flex items-center text-sm ${ open ? 'outline-none ring-2 ring-offset-2 ring-offset-gray-800 ring-white' : ''}`}>
-                <Avatar src={avatarUrl} type='circle' className='h-8 w-8 rounded-full object-cover object-top cursor-pointer'/>
+                <Avatar src={avatarUrl} type='circle' className='h-8 w-8'/>
               </Menu.Button>
             {/* </div> */}
             <Transition

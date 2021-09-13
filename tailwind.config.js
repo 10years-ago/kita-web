@@ -5,7 +5,10 @@ module.exports = {
     extend: {
       maxWidth: {
         '8xl': '90rem'
-       }
+      },
+      height: {
+        'main-height': 'calc(100% - 4rem)'
+      }
     },
   },
   variants: {
@@ -13,5 +16,5 @@ module.exports = {
       backgroundColor: ['active']
     },
   },
-  plugins: [],
+  plugins: []
 }

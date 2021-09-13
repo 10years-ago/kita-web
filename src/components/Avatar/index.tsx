@@ -8,6 +8,6 @@ interface avatarProps {
 
 export const Avatar: React.FC<avatarProps> = ({ ...variant }) => {
     return (
-      <img src={variant.src} alt="" className={`${variant.className}`}/>
+      <img src={variant.src} alt="" className={`${variant.type === "circle" ? 'rounded-full object-cover object-top cursor-pointer' : ''} ${variant.className}`}/>
     );
 }
