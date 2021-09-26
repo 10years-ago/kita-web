@@ -1,11 +1,17 @@
 import gql from 'graphql-tag'
-import titleInfoFragment from 'common/fragment/title'
+import contentInfoFragment from 'common/fragment/content'
 
-export const addTitleMutation = gql`
-mutation ($variables: CreateTitleInput!) {
-  createTitle (variables:$variables) {
-    ...titleInfo
+export const addContentMutation = gql`
+  mutation ($variables: CreateContentInput!) {
+    createContent(variables: $variables) {
+      errors {
+        field
+        message
+      }
+      content {
+        ...contentInfo
+      }
+    }
   }
-}
-${titleInfoFragment}
+  ${contentInfoFragment}
 `

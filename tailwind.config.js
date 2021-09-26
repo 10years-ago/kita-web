@@ -4,17 +4,17 @@ module.exports = {
   theme: {
     extend: {
       maxWidth: {
-        '8xl': '90rem'
+        '8xl': '90rem',
       },
       height: {
-        'main-height': 'calc(100% - 4rem)'
-      }
+        'main-height': 'calc(100vh - 4rem)',
+      },
     },
   },
   variants: {
     extend: {
-      backgroundColor: ['active']
+      backgroundColor: ['active'],
     },
   },
-  plugins: []
+  plugins: [],
 }

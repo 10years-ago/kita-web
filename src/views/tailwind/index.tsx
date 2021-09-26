@@ -7,10 +7,11 @@ import { useQuery } from 'urql'
 import Link from 'next/link'
 import Highlight, { defaultProps } from 'prism-react-renderer'
 import theme from 'prism-react-renderer/themes/nightOwl'
+import { AddCode } from './components/addCode'
 
 export const Tailwind: React.FC = () => {
   const [titleId, setTitleId] = useState('')
-  const [code, setCode] = useState('')
+  const [isAdd, setIsAdd] = useState(false)
   const [playground, setPlayground] = useState(false)
   const [result, reexecuteQuery] = useQuery({
     query: getLangByLangName,
@@ -20,27 +21,18 @@ export const Tailwind: React.FC = () => {
     },
   })
   const { data, fetching, error } = result
-  const exampleCode = `
-  import React, { useState } from "react";
-  
-  function Example() {
-    const [count, setCount] = useState(0);
-  
-    return (
-      <div>
-        <p>You clicked {count} times</p>
-        <button onClick={() => setCount(count + 1)}>
-          Click me
-        </button>
-      </div>
-    );
-  } 
-  `.trim()
+  let langByLangName
+  if (data?.langByLangName) {
+    langByLangName = data.langByLangName
+    if (titleId === '') {
+      setTitleId(langByLangName?.titles[0]?.id)
+    }
+  }
   return (
     <Layout lang='tailwind'>
-      <div className='flex relative h-full'>
+      <div className='flex relative h-full overflow-y-auto'>
         {/* 左边菜单栏 */}
-        {data?.langByLangName && (
+        {langByLangName && (
           <Menu
             lang={data.langByLangName}
             titleId={titleId}
@@ -48,17 +40,17 @@ export const Tailwind: React.FC = () => {
           />
         )}
         {/* 右边主要内容 */}
-        <div className='flex-1'>
+        <div className='flex-1 overflow-y-auto'>
           <div className='w-full max-w-4xl mx-auto'>
-            {data?.langByLangName?.contents.map((item) => {
+            {langByLangName?.contents.map((item) => {
               return (
                 <div key={item.id}>
                   <p className='font-bold text-3xl'>{item?.contentTitle}</p>
                   <p>{item?.content}</p>
-                  <p>{item?.code}</p>
+                  {/* <div dangerouslySetInnerHTML={{ __html: example }}></div> */}
                   <Highlight
                     {...defaultProps}
-                    code={exampleCode}
+                    code={item?.code}
                     theme={theme}
                     language='jsx'
                   >
@@ -91,15 +83,20 @@ export const Tailwind: React.FC = () => {
                       </pre>
                     )}
                   </Highlight>
-                  <input
-                    type='text'
-                    value={code}
-                    onInput={(e) => setCode(e.currentTarget.value)}
-                  />
-                  <div dangerouslySetInnerHTML={{ __html: code }}></div>
+                  <div dangerouslySetInnerHTML={{ __html: item?.code }}></div>
                 </div>
               )
             })}
+            {!isAdd && (
+              <button
+                className='w-1/4 px-4 py-2 font-bold text-white bg-blue-500 rounded-full hover:bg-blue-600 focus:outline-none focus:shadow-outline'
+                type='button'
+                onClick={() => setIsAdd(true)}
+              >
+                添加
+              </button>
+            )}
+            {isAdd && <AddCode setIsAdd={setIsAdd} titleId={titleId} />}
           </div>
         </div>
         {/* playground按钮 */}
@@ -110,9 +107,9 @@ export const Tailwind: React.FC = () => {
           />
           <div onClick={() => setPlayground(false)}>
             <Avatar
-              src='kita.jpg'
+              src='back.svg'
               type='circle'
-              className='absolute w-16 h-16 right-8 top-16'
+              className='absolute w-12 h-12 right-8 top-16 border-4 border-transparent hover:bg-gray-300'
             />
           </div>
         </div>
@@ -121,18 +118,18 @@ export const Tailwind: React.FC = () => {
           onClick={() => setPlayground(true)}
         >
           <Avatar
-            src='kita.jpg'
+            src='code.svg'
             type='circle'
-            className='absolute w-16 h-16 right-8 top-8'
+            className='absolute w-12 h-12 right-8 top-8 border-4 border-transparent hover:bg-gray-300'
           />
         </div>
         {!playground && (
           <Link href='https://tailwindcomponents.com/gradient-generator/'>
             <a target='_blank'>
               <Avatar
-                src='kita.jpg'
+                src='color.svg'
                 type='circle'
-                className='absolute w-16 h-16 right-8 top-32'
+                className='absolute w-12 h-12 right-8 top-28 border-4 border-transparent hover:bg-gray-300'
               />
             </a>
           </Link>
