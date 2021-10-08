@@ -1,4 +1,3 @@
-import { getLangByLangName } from 'common/query/lang'
 import { Avatar } from 'components/Avatar'
 import { Layout } from 'components/layout'
 import { Menu } from 'components/menu'
@@ -8,46 +7,42 @@ import Link from 'next/link'
 import Highlight, { defaultProps } from 'prism-react-renderer'
 import theme from 'prism-react-renderer/themes/nightOwl'
 import { AddCode } from './components/addCode'
+import { loginAndTailwind } from 'common/query/user'
+import cookie from 'react-cookies'
 
 export const Tailwind: React.FC = () => {
   const [titleId, setTitleId] = useState('')
   const [isAdd, setIsAdd] = useState(false)
   const [playground, setPlayground] = useState(false)
   const [result, reexecuteQuery] = useQuery({
-    query: getLangByLangName,
+    query: loginAndTailwind,
     variables: {
+      token: cookie.load('user') || '',
       langName: 'tailwind',
-      titleId,
+      titleId: titleId,
+      xxx: 123,
     },
   })
   const { data, fetching, error } = result
-  let langByLangName
-  if (data?.langByLangName) {
-    langByLangName = data.langByLangName
-    if (titleId === '') {
-      setTitleId(langByLangName?.titles[0]?.id)
-    }
+  let lang, user
+  if (data?.userByToken) {
+    user = data.userByToken
+    lang = user?.lang
   }
+  console.log(data)
   return (
     <Layout lang='tailwind'>
       <div className='flex relative h-full overflow-y-auto'>
         {/* 左边菜单栏 */}
-        {langByLangName && (
-          <Menu
-            lang={data.langByLangName}
-            titleId={titleId}
-            setTitleId={setTitleId}
-          />
-        )}
+        {lang && <Menu lang={lang} titleId={titleId} setTitleId={setTitleId} />}
         {/* 右边主要内容 */}
         <div className='flex-1 overflow-y-auto'>
           <div className='w-full max-w-4xl mx-auto'>
-            {langByLangName?.contents.map((item) => {
+            {lang?.contents.map((item) => {
               return (
                 <div key={item.id}>
                   <p className='font-bold text-3xl'>{item?.contentTitle}</p>
                   <p>{item?.content}</p>
-                  {/* <div dangerouslySetInnerHTML={{ __html: example }}></div> */}
                   <Highlight
                     {...defaultProps}
                     code={item?.code}
